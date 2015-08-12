@@ -1,4 +1,3 @@
-
 <?php
 
   include 'config.php';
@@ -24,11 +23,27 @@
     echo $e->getMessage();
   }
 ?>
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Wayne State University, WSU, Library System, Libraries" />
+        <meta name="description" content="The online resources and services of the Wayne State University Libraries" />
+        <meta name="author" content="libwebmaster@wayne.edu" />
+        <meta name="Copyright" content="Copyright (c) <?php echo(date('Y')); ?> Wayne State University" />
 
-<html>
-  <head>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="icon" href="/inc/img/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/ico/style.css">
+  <link href="//library.wayne.edu/inc/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/pattern-lib/css/style.css">
+
+        <title>Wayne State University Libraries : Printer Status</title>
+
+        <script src="/pattern-lib/js/jquery.min.js"></script>
+    <script src="/pattern-lib/js/bootstrap.min.js"></script>
+    <script src="/pattern-lib/js/main.js"></script>
     <style type="text/css">
       .status {
         font-weight:bold;
@@ -40,12 +55,13 @@
         color:red;
       }
     </style>
-  </head>
-
-  <body>
-    <div class="container">
-
-      <div class="row">
+</head>
+<body>
+        <div class="page" id="wrap">
+                <?php include($_SERVER['DOCUMENT_ROOT'].'inc/header.php'); ?>
+                <div id="main" class="container">
+<!-- ################################################################################################################################ -->
+<div class="row">
         <div class="col-md-12">
           <h2>Printer Status</h2>
         </div>
@@ -78,28 +94,26 @@
           </table>
 
         </div>
-      </div>
+      </div>        
 
-    </div> 
-  </body>
 
-</html> 
 
+
+
+
+
+<!-- ################################################################################################################################ -->
+                </div>
+
+        </div>
+        <?php include($_SERVER['DOCUMENT_ROOT'].'inc/footer.php'); ?>
+</body>
+</html>`
 <?php
-
-  /**************************************
-  * Drop tables                         *
-  **************************************/
-
-  // Drop table messages from file db
-  // $file_db->exec("DROP TABLE printer");
-   
-
   /**************************************
   * Close db connections                *
   **************************************/
 
   // Close file db connection
   $file_db = null;
-
 ?>
