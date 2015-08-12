@@ -59,7 +59,7 @@
               <th>Printer Name</th>
               <th>Status</th>
               <th>Message</th>
-              <th>Updated</th>
+              <th>Last Updated</th>
             </tr>
             <?php
               
