@@ -2,14 +2,13 @@
 <?php
 
   include 'config.php';
+  include 'inc/password_protect.php';
  
   // Set default timezone
   date_default_timezone_set('UTC');
 
   // set default message
   $msg = "";
-
-  print_r($_REQUEST);
 
   /**************************************
   * Create databases and                *
@@ -26,7 +25,7 @@
   // if init, drop and create table, populate with all printers from config online
   if ($_REQUEST['init']){
     
-    $msg = "FIRING INIT";   
+    $msg = "Re-Initializing, pulling in printers from config, setting all to 'online'";   
     
     try {
 
@@ -44,7 +43,7 @@
    
       // Create table messages
       $file_db->exec("CREATE TABLE IF NOT EXISTS printer (
-                      id INTEGER PRIMARY KEY, 
+                      id INTEGER PRIMARY KEY AUTOINCREMENT, 
                       name TEXT, 
                       status TEXT,
                       message TEXT, 
@@ -70,7 +69,7 @@
         // Set values to bound variables
         $name = $printer;
         $status = "online";
-        $message = "n/a";
+        $message = "OK";
    
         // Execute statement
         $stmt->execute();
@@ -89,12 +88,12 @@
   // if printer update (printer_id key present), update printer row in SQLite
   if (array_key_exists("printer_id", $_REQUEST)){
     
-    $msg = "updating printer";
+    $msg = "Updating status of printer: {$_REQUEST['printer_name']}";
 
     // update row
     // Prepare INSERT statement to SQLite3 file db
     $insert = "UPDATE printer  
-                SET status = :status, message = :message
+                SET status = :status, message = :message, updated = (DATETIME('now')) 
                 WHERE id = :id";
     $stmt = $file_db->prepare($insert);
  
@@ -144,8 +143,8 @@
         <div class="col-md-12">
           <h3>Manage</h3>
           <ul class="list-inline">
-            <li><a href="#">Reset All</a></li>
-            <li><a href="#">Do Other Thing</a></li>
+            <li><a href="./manage.php?init=true">Reset All</a></li>
+            <!-- <li><a href="#">Do Other Thing</a></li> -->
           </ul>
         </div>
       </div>
@@ -157,8 +156,8 @@
             <tr>
               <th>Printer Name</th>
               <th>Current Status</th>
-              <th>Message</th>
-              <th>Updated</th>
+              <th>Current Message</th>
+              <th>Last Updated</th>
               <th>Update Status</th>
             </tr>
             <?php
@@ -184,9 +183,12 @@
                       </label>
                     </div>
                     <div class="form-group">
-                      <input type="text" name="printer_message" placeholder="update message..."/>
+                      <input type="text" class="form-control" name="printer_message" placeholder="update message..."/>
                     </div>
-                    <input type="hidden" name="printer_id" value="<?php echo $row['id'] ?>"/>
+                    <div class="form-group" id="hidden">
+                      <input type="hidden" name="printer_id" value="<?php echo $row['id'] ?>"/>
+                      <input type="hidden" name="printer_name" value="<?php echo $row['name'] ?>"/>
+                    </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-default">Submit</button>
                     </div>
