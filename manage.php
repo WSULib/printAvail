@@ -160,7 +160,7 @@
           <h3>Manage</h3>
           <ul class="list-inline">
             <li><a href="./manage.php?init=true">Reset All</a></li>
-            <!-- <li><a href="#">Do Other Thing</a></li> -->
+            <li><a href="./index.php">Librarian / Public View</a></li>
           </ul>
         </div>
       </div>
