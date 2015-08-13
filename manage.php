@@ -188,7 +188,7 @@
                       </label>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" name="printer_message" placeholder="update message..."/>
+                      <input type="text" name="printer_message" placeholder="update message..."/>
                     </div>
                     <div class="form-group" id="hidden">
                       <input type="hidden" name="printer_id" value="<?php echo $row['id'] ?>"/>
