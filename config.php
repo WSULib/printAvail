@@ -23,5 +23,16 @@ $ip_white_list = array(
 	"141.217.54.97"
 );
 
+/**************************************
+* Create databases and                *
+* open connections                    *
+**************************************/
+
+// Create (connect to) SQLite database in file
+$file_db = new PDO('sqlite:'.$database_name);
+// Set errormode to exceptions
+$file_db->setAttribute(PDO::ATTR_ERRMODE, 
+                          PDO::ERRMODE_EXCEPTION);
+
 
 ?>

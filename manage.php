@@ -9,18 +9,6 @@
   // set default message
   $msg = "";
 
-  /**************************************
-  * Create databases and                *
-  * open connections                    *
-  **************************************/
-
-  // Create (connect to) SQLite database in file
-  // $file_db = new PDO('sqlite:printAvail.db');
-  $file_db = new PDO('sqlite:'.$database_name);
-  // Set errormode to exceptions
-  $file_db->setAttribute(PDO::ATTR_ERRMODE, 
-                          PDO::ERRMODE_EXCEPTION);
-
   // if init, drop and create table, populate with all printers from config online
   if ($_REQUEST['init']){
     
@@ -40,14 +28,15 @@
       * Create tables                       *
       **************************************/
    
-      // Create table messages
+      // Create table
       $file_db->exec("CREATE TABLE IF NOT EXISTS printer (
                       id INTEGER PRIMARY KEY AUTOINCREMENT, 
                       name TEXT, 
                       status TEXT,
                       message TEXT, 
-                      updated DATETIME DEFAULT CURRENT_TIMESTAMP)");
-   
+                      updated DATETIME DEFAULT CURRENT_TIMESTAMP)"); 
+
+ 
    
       /**************************************
       * Set initial data                    *
